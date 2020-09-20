@@ -1,14 +1,28 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+
+import AuthLayout from '../pages/_layouts/auth';
+import DefaultLayout from '../pages/_layouts/default';
 
 const RouteWrapper = ({ component: Component, isPrivate = false, ...rest }) => {
   const signed = false;
   if (!signed && isPrivate) return <Redirect to="/" />;
   if (signed && !isPrivate) return <Redirect to="/dashboard" />;
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route component={Component} {...rest} />;
+  const Layout = signed ? DefaultLayout : AuthLayout;
+
+  return (
+    <Route
+      render={(props) => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+      {...rest}
+    />
+  );
 };
 
 RouteWrapper.propTypes = {
