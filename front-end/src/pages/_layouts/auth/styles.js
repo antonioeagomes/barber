@@ -32,6 +32,13 @@ export const Content = styled.div`
     &::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
+
+    span {
+      color: #f5194a;
+      margin-bottom: 0.625rem;
+      align-self: flex-start;
+      font-weight: bold;
+    }
   }
   button {
     margin: 0.3125rem 0 0;
