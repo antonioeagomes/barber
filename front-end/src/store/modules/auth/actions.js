@@ -17,3 +17,10 @@ export function signFailure() {
     type: '@auth/SIGN_FAILURE',
   };
 }
+
+export function signUpRequest(name, email, password) {
+  return {
+    type: '@auth/SIGNUP_REQUEST',
+    payload: { name, email, password },
+  };
+}

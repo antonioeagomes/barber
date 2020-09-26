@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import logo from '../../assets/radio.svg';
+import { signUpRequest } from '../../store/modules/auth/actions';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Type a valid mail').required('Email is mandatory'),
@@ -11,6 +14,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       name: '',
@@ -18,9 +22,9 @@ const SignUp = () => {
       password: '',
     },
     validationSchema,
-    onSubmit(v) {
-      // eslint-disable-next-line no-console
-      console.log(JSON.stringify(v));
+    onSubmit({ name, email, password }) {
+      toast.warning('Entrou');
+      dispatch(signUpRequest(name, email, password));
     },
   });
   return (

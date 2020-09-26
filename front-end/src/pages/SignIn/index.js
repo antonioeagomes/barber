@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/radio.svg';
 import { signInRequest } from '../../store/modules/auth/actions';
 
@@ -13,6 +13,7 @@ const validationSchema = Yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       email: '',
@@ -45,7 +46,7 @@ const SignIn = () => {
           value={values.password}
         />
         <span>{errors.password || null}</span>
-        <button type="submit">Sign In</button>
+        <button type="submit">{loading ? 'Loading...' : 'Sign In'}</button>
         <Link to="/register">Sign Up</Link>
       </form>
     </>
