@@ -17,12 +17,12 @@ const RouteWrapper = ({ component: Component, isPrivate = false, ...rest }) => {
 
   return (
     <Route
+      {...rest}
       render={(props) => (
         <Layout>
           <Component {...props} />
         </Layout>
       )}
-      {...rest}
     />
   );
 };
