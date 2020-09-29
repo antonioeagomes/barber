@@ -15,8 +15,10 @@ export function* signIn({ payload }) {
       toast.error('Não é barbeiro.');
       return;
     }
-    history.push('/dashboard');
+
     yield put(signInSuccess(token, user));
+    toast.success('Make yourself at home');
+    history.push('/dashboard');
   } catch (error) {
     toast.error('Falha na autenticação.');
     yield put(signFailure());
@@ -40,7 +42,16 @@ export function* signUp({ payload }) {
   }
 }
 
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) api.defaults.headers.Authorization = `Bearer ${token}`;
+}
+
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGNIN_REQUEST', signIn),
   takeLatest('@auth/SIGNUP_REQUEST', signUp),
 ]);

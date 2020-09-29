@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import logo from '../../assets/radio.svg';
 import { signUpRequest } from '../../store/modules/auth/actions';
 
@@ -23,7 +22,6 @@ const SignUp = () => {
     },
     validationSchema,
     onSubmit({ name, email, password }) {
-      toast.warning('Entrou');
       dispatch(signUpRequest(name, email, password));
     },
   });

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   height: 100%;
-  background: #f18d9e;
+  background: linear-gradient(-90deg, #011a27, #063852);
 `;
 
 /* Aquamarine #98dbc6
