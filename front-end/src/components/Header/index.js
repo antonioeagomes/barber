@@ -1,10 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Content, Profile } from './styles';
 import logo from '../../assets/radio.svg';
 import Notifications from '../Notifications';
 
 const Header = () => {
+  const profile = useSelector((state) => state.user.profile);
   return (
     <Container>
       <Content>
@@ -16,7 +18,7 @@ const Header = () => {
         <aside>
           <Profile>
             <div>
-              <strong>Seu Menino</strong>
+              <strong>{profile.name}</strong>
               <Link to="/profile">Meu perfil</Link>
             </div>
           </Profile>

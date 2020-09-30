@@ -14,20 +14,26 @@ import {
 const Notifications = () => {
   const [visible, setVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const hasUnread = useMemo(() => notifications.find((n) => !n.read));
-  const handleToggleVisible = () => {
+
+  const hasUnread = useMemo(() => !!notifications.find((n) => !n.read), [
+    notifications,
+  ]);
+
+  function handleToggleVisible() {
     setVisible(!visible);
-  };
+  }
+
   async function markAsRead(id) {
     await api.put(`notifications/${id}`);
 
     setNotifications(
-      !!notifications.map((n) =>
+      notifications.map((n) =>
         n._id === id ? { ...n, read: true } : { ...n }
       ),
       [notifications]
     );
   }
+
   useEffect(() => {
     async function loadNotifications() {
       const response = await api.get('notifications');
@@ -45,6 +51,7 @@ const Notifications = () => {
     }
     loadNotifications();
   }, []);
+
   return (
     <Container>
       <Badge onClick={handleToggleVisible} hasUnread={hasUnread}>
