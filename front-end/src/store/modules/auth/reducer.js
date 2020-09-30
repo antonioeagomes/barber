@@ -22,6 +22,11 @@ const auth = (state = INITIAL_STATE, action) => {
         draft.loading = false;
         break;
       }
+      case '@auth/SIGNOUT': {
+        draft.token = null;
+        draft.signed = false;
+        break;
+      }
       default:
     }
   });

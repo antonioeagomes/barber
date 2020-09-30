@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from './styles';
 import { updateProfileRequest } from '../../store/modules/user/actions';
+import { signOut } from '../../store/modules/auth/actions';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Type a valid mail'),
@@ -28,6 +29,9 @@ const Profile = () => {
 
   function handleChangeConfirm({ value }) {
     setConfirmPassword(value);
+  }
+  function handleSignOut() {
+    dispatch(signOut());
   }
   return (
     <Container>
@@ -76,7 +80,9 @@ const Profile = () => {
         <span>{errors.password || null}</span>
         <button type="submit">Save</button>
       </form>
-      <button type="button">Logout</button>
+      <button type="button" onClick={handleSignOut}>
+        Logout
+      </button>
     </Container>
   );
 };
