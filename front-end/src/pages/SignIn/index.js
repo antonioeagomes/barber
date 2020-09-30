@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../../assets/radio.svg';
+import logo from '../../assets/radio.svg'; 
 import { signInRequest } from '../../store/modules/auth/actions';
 
 const validationSchema = Yup.object().shape({
